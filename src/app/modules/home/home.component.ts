@@ -12,7 +12,7 @@ const AllMPsQuery = gql`
             id
             name
             twitterUsername
-            ethicity
+            ethnicity
             image
             dob
             party
@@ -33,7 +33,8 @@ export class HomeComponent implements OnInit {
   partySelected: string = "Labour";
   parties = [
         {name: "Labour"},
-        {name: "Conservative"}
+        {name: "Conservative"},
+        {name: "Scottish National Party"}
     ];
 
   constructor(

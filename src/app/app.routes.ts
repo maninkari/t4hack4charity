@@ -9,7 +9,9 @@ export const routes:Routes = [
     redirectTo: '/home',
     pathMatch: 'full'
   },
-  {path: 'home', component: HomeComponent}
+  {path: 'home', component: HomeComponent},
+  {path: 'tagcloud', loadChildren: './modules/tagcloud/tagcloud.module#TagcloudModule'},
+  {path: 'about', loadChildren: './modules/about/about.module#AboutModule'},
 ];
 
 export const routing:ModuleWithProviders = RouterModule.forRoot(routes);
