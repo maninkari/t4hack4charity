@@ -14,6 +14,9 @@
     <select (change)="onChange($event.target.value)" class="selectpicker">
       <option *ngFor="let p of parties">{{p.name}}</option>
     </select>
+    <select (change)="onChangeEth($event.target.value)" class="selectpicker">
+      <option *ngFor="let e of ethnicity">{{e.name}}</option>
+    </select>
     <br/>
     <br/>
   </div>
@@ -25,7 +28,7 @@
       <li>name: {{MP.name}}</li>
       <li>dob: {{MP.dob}}</li>
       <li>party: {{MP.party}}</li>
-      <li>twitter: <span *ngIf="MP.twitterUsername">@</span>{{MP.twitterUsername}}</li>
+      <li>twitter: {{MP.twitterUsername}}</li>
     </ul>
     <br/>
   </div>

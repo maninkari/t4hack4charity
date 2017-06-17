@@ -5,9 +5,10 @@ import gql from 'graphql-tag';
 import 'rxjs/add/operator/toPromise';
 
 const AllMPsQuery = gql`
-    query AllMPsQuery($party: String) {
+    query AllMPsQuery($party: String, $ethnicity: String) {
         allMPs(filter: {
-            party: $party
+            party: $party,
+            ethnicity: $ethnicity
         }) {
             id
             name
@@ -36,6 +37,11 @@ export class HomeComponent implements OnInit {
         {name: "Conservative"},
         {name: "Scottish National Party"}
     ];
+  ethnicitySelected: string = "Ethnic minority";
+  ethnicity = [
+        {name: "Ethnic minority"},
+        {name: "White"}
+    ];
 
   constructor(
       private apollo: Apollo
@@ -47,7 +53,8 @@ export class HomeComponent implements OnInit {
     this.allMPsSub = this.apollo.watchQuery({
       query: AllMPsQuery,
       variables: {
-        party: this.partySelected
+        party: this.partySelected,
+        ethnicity: this.ethnicitySelected
       }
     }).subscribe(({data, loading}: any) => {
       this.allMPs = data.allMPs;
@@ -61,7 +68,23 @@ export class HomeComponent implements OnInit {
         this.allMPsSub = this.apollo.watchQuery({
             query: AllMPsQuery,
             variables: {
-                party: this.partySelected
+                party: this.partySelected,
+                ethnicity: this.ethnicitySelected
+            }
+        }).subscribe(({data, loading}: any) => {
+            this.allMPs = data.allMPs;
+            this.loading = loading;
+        });
+    }
+
+    onChangeEth(deviceValue) {
+        this.ethnicitySelected = deviceValue;
+
+        this.allMPsSub = this.apollo.watchQuery({
+            query: AllMPsQuery,
+            variables: {
+                party: this.partySelected,
+                ethnicity: this.ethnicitySelected
             }
         }).subscribe(({data, loading}: any) => {
             this.allMPs = data.allMPs;
